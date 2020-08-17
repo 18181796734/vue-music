@@ -1,12 +1,20 @@
 <template>
   <div>
-    home
+    <Header></Header>
+    <Tag></Tag>
   </div>
 </template>
 
 <script>
-export default {
+import Header from './components/Header'
+import Tag from './components/Tag'
 
+export default {
+  name: 'Home',
+  components: {
+    Header,
+    Tag
+  }
 }
 </script>
 
