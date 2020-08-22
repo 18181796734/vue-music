@@ -37,7 +37,6 @@ export default {
     },
     _getRecommendList () {
       getRecommendList().then((res) => {
-        console.log(res.data.result)
         this.recommendSongList = res.data.result
       })
     }
