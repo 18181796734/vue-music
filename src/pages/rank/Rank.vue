@@ -9,7 +9,9 @@
             </div>
             <div class="right">
               <ul>
-                <li class="text" v-for="(title, index) of item.rank" :key="index">{{index + 1}}.{{title.name}}&nbsp;-&nbsp;{{title.ar[0].name}}</li>
+                <li class="text" v-for="(title, index) of item.rank" :key="index">
+                  {{index + 1}}.{{title.name}}&nbsp;-&nbsp;{{title.ar[0].name}}
+                </li>
               </ul>
             </div>
           </li>

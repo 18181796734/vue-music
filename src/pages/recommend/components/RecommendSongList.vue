@@ -1,15 +1,15 @@
 <template>
   <div>
     <header class="header">推荐歌单</header>
-    <div class="content">
-      <div class="box" v-for="item of recommendSongList" :key="item.id">
+    <ul class="content">
+      <li class="box" @click="handleEnterClick(item.id)" v-for="item of recommendSongList" :key="item.id">
         <div class="top">{{count(item.playCount)}}</div>
         <div class="image">
           <img v-lazy="item.picUrl" alt="">
         </div>
         <div class="bottom">{{item.name}}</div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -34,6 +34,11 @@ export default {
       } else {
         return Math.round(n / 100000000) + '亿'
       }
+    },
+    handleEnterClick (id) {
+      this.$router.push({
+        path: '/recommend/' + id
+      })
     },
     _getRecommendList () {
       getRecommendList().then((res) => {
