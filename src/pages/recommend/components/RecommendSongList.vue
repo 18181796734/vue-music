@@ -3,13 +3,18 @@
     <header class="header">推荐歌单</header>
     <ul class="content">
       <li class="box" @click="handleEnterClick(item.id)" v-for="item of recommendSongList" :key="item.id">
-        <div class="top">{{count(item.playCount)}}</div>
+        <div class="top">
+          {{count(item.playCount)}}
+          </div>
         <div class="image">
           <img v-lazy="item.picUrl" alt="">
         </div>
-        <div class="bottom">{{item.name}}</div>
+        <div class="bottom">
+          {{item.name}}
+        </div>
       </li>
     </ul>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
@@ -70,7 +75,7 @@ export default {
         color #fff
         background black
         border-radius 5px
-        background linear-gradient(to bottom,rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+        background linear-gradient(to bottom,rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))
         text-align right
       .image img
         margin 0 auto

@@ -11,7 +11,7 @@
               <ul>
                 <li class="text" v-for="(title, index) of item.rank" :key="index">
                   {{index + 1}}.{{title.name}}&nbsp;-&nbsp;{{title.ar[0].name}}
-                </li>
+                  </li>
               </ul>
             </div>
           </li>
@@ -36,6 +36,7 @@ export default {
   },
   created () {
     this._getRank()
+    this._getRank2()
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.wrapper, {

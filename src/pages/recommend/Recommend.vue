@@ -1,11 +1,14 @@
 <template>
-  <div class="content" ref="wrapper">
-    <div class="box">
-      <Banner></Banner>
-      <v-touch v-on:swipeleft="swipeleft" class="recommend">
-        <RecommendSongList></RecommendSongList>
-      </v-touch>
+  <div>
+    <div class="content" ref="wrapper">
+      <div class="box">
+        <Banner></Banner>
+        <v-touch v-on:swipeleft="swipeleft" class="recommend">
+          <RecommendSongList></RecommendSongList>
+        </v-touch>
+      </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
