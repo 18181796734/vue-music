@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="left">=</div>
-    <div class="log">小可爱音乐</div>
+    <div class="log">网抑云音乐</div>
     <div class="right">Q</div>
   </div>
 </template>
