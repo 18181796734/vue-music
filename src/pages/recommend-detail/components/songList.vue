@@ -2,14 +2,14 @@
   <div class="allList" ref="wrapper">
     <div>
       <div class="header">
-        <div class="header-icon">*</div>
+        <div class="header-icon iconfont">&#xe624;</div>
         <div class="header-text">
           播放全部
           <span>(共{{songList.length}}首)</span>
         </div>
       </div>
       <ul>
-        <li class="list" v-for="(item, index) of songList" :key="index">
+        <li class="list" v-for="(item, index) of songList" :key="item.id" @click="playClick(item.id)">
           <div class="list-index">{{index + 1}}</div>
           <div class="list-content">
             <div class="song-name">{{item.name}}</div>
@@ -34,6 +34,13 @@ export default {
     })
   },
   methods: {
+    playClick (id) {
+      this.$router.push({
+        path: '/player/' + id
+      })
+      // this.$store.state.playSongId = id
+      // this.$store.state.playing = true
+    },
     songer (arr) {
       var songer
       if (arr.length === 1) {

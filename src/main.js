@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+// import Vuex from 'vuex'
 import router from './router'
 import VueTouch from 'vue-touch'
 import fastClick from 'fastclick'
@@ -11,6 +12,11 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import './assets/styles/reset.css'
 import './assets/styles/border.css'
+import './assets/styles/iconfont.css'
+
+import store from './store'
+
+// Vue.use(Vuex)
 
 Vue.use(VueTouch, {name: 'v-touch'})
 Vue.use(VueAwesomeSwiper /* { default global options } */)
@@ -30,6 +36,7 @@ fastClick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
