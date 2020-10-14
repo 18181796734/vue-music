@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-detail">
     <header>
-      <div class="back" @click="handleBackClick">--</div>
+      <div class="back iconfont" @click="handleBackClick">&#xe606;</div>
       <div class="header-text">歌单</div>
     </header>
     <div class="content" ref="wrapper">
@@ -11,7 +11,7 @@
           <div class="title">
             <div class="left">
               <img v-lazy="playlist.coverImgUrl" alt="">
-              <div class="count">{{count(playlist.playCount)}}</div>
+              <div class="count iconfont">&#xe77e;{{count(playlist.playCount)}}</div>
             </div>
             <div class="right">
               <div class="right-top">{{playlist.name}}</div>
@@ -40,20 +40,18 @@ export default {
   data () {
     return {
       playlist: [],
-      songList: []
+      songList: [],
+      playingList: []
     }
   },
   created () {
     this._getPlayList()
   },
-  mounted () {
-    // this.scroll = new BScroll(this.$refs.wrapper, {
-    //   click: true
-    // })
-  },
   methods: {
     handleBackClick () {
-      this.$router.go(-1)
+      this.$router.push({
+        path: '/recommend'
+      })
     },
     count (n) {
       if (n < 10000) {
@@ -68,6 +66,11 @@ export default {
       getPlayList(this.$route.params.id).then((res) => {
         this.playlist = res.data.playlist
         this.songList = res.data.playlist.tracks
+        for (let i = 0; i < this.songList.length; i++) {
+          this.playingList.push(res.data.playlist.trackIds[i].id)
+        }
+        this.$store.state.playingList = this.playingList
+        console.log(this.playingList)
       })
     }
   }
@@ -97,6 +100,7 @@ export default {
       .back
         width 60px
         text-align center
+        font-size 24px
       .header-text
         width calc(100vw - 60px)
     .content
