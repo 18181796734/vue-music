@@ -5,6 +5,7 @@ import Rank from '@/pages/rank/Rank'
 import Recommend from '@/pages/Recommend/Recommend'
 import RecommendDetail from '@/pages/recommend-detail/RecommendDetail'
 import Player from '@/pages/player/Player'
+import Search from '@/pages/search/Search'
 
 Vue.use(Router)
 
@@ -28,6 +29,9 @@ export default new Router({
     }, {
       path: '/singer',
       component: Singer
+    }, {
+      path: '/search',
+      component: Search
     }, {
       path: '/player/:id',
       component: Player

@@ -5,10 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    playing: false,
-    fullScreen: false,
+    playing: true,
     playSongId: 0,
-    playlist: [],
-    songUrl: ''
+    playingList: [],
+    songUrl: '',
+    loop: 0, // 0为列表循环、1为单曲循环
+    router: '',
+    currentTime: 0,
+    duration: 0,
+    percent: 0,
+    imageTurn: false
   }
 })

@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left iconfont">&#xe66e;</div>
     <div class="log">网抑云音乐</div>
-    <div class="right iconfont">&#xe6b9;</div>
+    <router-link tag="div" to="/search" class="right iconfont">&#xe6b9;</router-link>
   </div>
 </template>
 

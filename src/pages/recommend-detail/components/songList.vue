@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     playClick (id) {
+      this.$store.state.router = this.$route.path
       this.$router.push({
         path: '/player/' + id
       })
