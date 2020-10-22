@@ -1,14 +1,14 @@
 <template>
-  <div class="player">
+  <div class="player" v-if="songData[0]">
     <!-- <audio id="music" :src="songUrl" autoplay>
     </audio> -->
     <div class="background">
-      <img class="background-img" :src="imageUrl" alt="">
+      <img class="background-img" :src="songData[0].al.picUrl" alt="">
     </div>
     <div class="content">
       <div class="header">
         <div class="back iconfont" @click="handleBack">&#xe606;</div>
-        <div class="name" v-if="songData[0]">
+        <div class="name">
           <div class="song-name">{{songData[0].name}}</div>
           <div class="songer-name">{{songData[0].ar[0].name}}</div>
         </div>
@@ -16,20 +16,20 @@
       <div class="image-lyric" @click="handleLyricClick">
         <div class="image" v-show="!lyric">
           <img class="image1" src="@/common/image/disc-ip6.png" alt="">
-          <img class="image2 autoRotate" :class="{imageTurn:this.$store.state.imageTurn}" v-lazy="imageUrl" alt="">
+          <img class="image2 autoRotate" :class="{imageTurn:imageTurn}" v-lazy="songData[0].al.picUrl" alt="">
         </div>
         <Lyric v-show="lyric"></Lyric>
       </div>
       <Time></Time>
       <div class="icon iconfont">
-        <div class="loop" @click="handLoopClick">{{this.$store.state.loop === 0 ? '&#xe66c;' : '&#xe66d;'}}</div>
-        <div class="on" @click="handlechangeClick('on')">&#xe6e1;</div>
+        <div class="loop" @click="handLoopClick">{{this.$store.state.loop === 0 ? '&#xe62a;' : '&#xe600;'}}</div>
+        <div class="on" @click="handlechangeClick('on')">&#xe602;</div>
         <div class="playing" @click="handlePlaying">
           <div class="play-icon">
-            {{this.$store.state.playing === true ? '&#xe663;' : '&#xe624;'}}
+            {{this.$store.state.playing === true ? '&#xe6a9;' : '&#xe651;'}}
           </div>
         </div>
-        <div class="under" @click="handlechangeClick('under')">&#xe718;</div>
+        <div class="under" @click="handlechangeClick('under')">&#xe6e7;</div>
         <div class="like">&#xe648;</div>
       </div>
     </div>
@@ -52,8 +52,8 @@ export default {
     return {
       songData: [],
       songUrl: '',
-      imageUrl: '',
-      lyric: false
+      lyric: false,
+      imageTurn: false
     }
   },
   created () {
@@ -95,13 +95,8 @@ export default {
       }
     },
     handlePlaying () {
-      if (this.$store.state.playing === false) {
-        this.$store.state.playing = true
-        this.$store.state.imageTurn = false
-      } else {
-        this.$store.state.playing = false
-        this.$store.state.imageTurn = true
-      }
+      this.$store.state.playing = !this.$store.state.playing
+      this.imageTurn = !this.imageTurn
     },
     handleBack () {
       if (this.$store.state.router) {
@@ -112,16 +107,13 @@ export default {
         this.$router.go(-1)
       }
     },
-    // lyricStatus () {
-    //   this.lyric = false
-    // },
     _getSongDetail () {
       getSongDetail(this.$route.params.id).then((res) => {
         this.songData = res.data.songs
-        this.imageUrl = res.data.songs[0].al.picUrl
       })
     },
     _getSongUrl () {
+      this.$store.state.playSongId = this.$route.params.id
       getSongUrl(this.$route.params.id).then((res) => {
         this.songUrl = res.data.data[0].url
         this.$store.state.songUrl = this.songUrl
@@ -130,8 +122,10 @@ export default {
   },
   watch: {
     '$route.params.id' () {
-      this._getSongDetail()
-      this._getSongUrl()
+      if (this.$route.path.slice(1, 7) === 'player' && this.$route.params.id !== this.$store.state.playSongId) {
+        this._getSongDetail()
+        this._getSongUrl()
+      }
     },
     '$store.state.currentTime' () {
       if (this.$store.state.currentTime === this.$store.state.duration && this.$store.state.loop === 0) {
@@ -173,7 +167,7 @@ export default {
         height 50px
         line-height 50px
         text-align center
-        font-size 24px
+        font-size 30px
       .name
         flex 1
         .song-name
@@ -226,12 +220,13 @@ export default {
         width 100vw
         height 100px
         display flex
-        font-size 23px
+        font-size 30px
         text-align center
         line-height 100px
         .loop
           width 20%
         .on
+          font-size 34px
           width 20%
         .playing
           width 20vw
@@ -250,6 +245,7 @@ export default {
             line-height 12vw
         .under
           width 20%
+          font-size 34px
         .like
           width 20%
 </style>

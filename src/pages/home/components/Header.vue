@@ -1,8 +1,8 @@
 <template>
   <div class="header">
-    <div class="left iconfont">&#xe66e;</div>
+    <router-link tag="div" to="/mine" class="left iconfont">&#xe61c;</router-link>
     <div class="log">网抑云音乐</div>
-    <router-link tag="div" to="/search" class="right iconfont">&#xe6b9;</router-link>
+    <router-link tag="div" to="/search" class="right iconfont">&#xe60f;</router-link>
   </div>
 </template>
 
@@ -29,5 +29,5 @@ export default {
       letter-spacing 3px
     .right
       width 15%
-      font-size 20px
+      font-size 25px
 </style>

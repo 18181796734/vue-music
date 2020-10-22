@@ -4,7 +4,7 @@
       <div class="back iconfont" @click="handleBackClick">&#xe606;</div>
       <div class="header-text">歌单</div>
     </header>
-    <div class="content" ref="wrapper">
+    <div class="content">
       <div class="box">
         <div class="content-img">
           <img :src="playlist.coverImgUrl" class="background-img" alt="">
@@ -63,14 +63,15 @@ export default {
       }
     },
     _getPlayList () {
-      getPlayList(this.$route.params.id).then((res) => {
+      this.$store.state.cookie = localStorage.getItem('登入令牌')
+      getPlayList(this.$route.params.id, this.$store.state.cookie).then((res) => {
         this.playlist = res.data.playlist
+        console.log(res.data.playlist)
         this.songList = res.data.playlist.tracks
         for (let i = 0; i < this.songList.length; i++) {
           this.playingList.push(res.data.playlist.trackIds[i].id)
         }
         this.$store.state.playingList = this.playingList
-        console.log(this.playingList)
       })
     }
   }
@@ -100,7 +101,7 @@ export default {
       .back
         width 60px
         text-align center
-        font-size 24px
+        font-size 30px
       .header-text
         width calc(100vw - 60px)
     .content

@@ -39,8 +39,6 @@ export default {
       this.$router.push({
         path: '/player/' + id
       })
-      // this.$store.state.playSongId = id
-      // this.$store.state.playing = true
     },
     songer (arr) {
       var songer
@@ -64,12 +62,6 @@ export default {
           songer = arr[0].name + '/' + arr[1].name + '/' + arr[2].name + '/' + arr[3].name + '/' + arr[4].name + '...'
       }
       return songer
-    }
-  },
-  watch: {
-    ces (a, b) {
-      console.log(a)
-      console.log(b)
     }
   }
 }

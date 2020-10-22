@@ -4,18 +4,21 @@
     </audio>
     <Header></Header>
     <Tag></Tag>
+    <MinPlayer v-show="this.$store.state.duration && this.$route.path.slice(1, 7) !== 'player'"></MinPlayer>
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
 import Tag from './components/Tag'
+import MinPlayer from './components/MinPlayer'
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Tag
+    Tag,
+    MinPlayer
   },
   data () {
     return {

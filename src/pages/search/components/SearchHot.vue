@@ -2,11 +2,10 @@
   <div class="hot">
     <div class="header">
       <div class="text">热搜榜</div>
-      <div class="iconfont">&#xe624;播放全部</div>
     </div>
     <div class="hot-list" v-for="(item, index) of hotSearchList" :key="index">
       <ul>
-        <li class="song">
+        <li class="song"  @click="handleSearchClick(item.first)">
           <div class="index">{{index + 1}}</div>
           <div>{{item.first}}</div>
         </li>
@@ -28,10 +27,12 @@ export default {
     this._getSearchHotList()
   },
   methods: {
+    handleSearchClick (key) {
+      this.$emit('getHotSong', key)
+    },
     _getSearchHotList () {
       getSearchHotList(this.$route.params.id).then((res) => {
         this.hotSearchList = res.data.result.hots
-        console.log(this.hotSearchList)
       })
     }
   }
@@ -46,17 +47,8 @@ export default {
     border-bottom 1px solid #ccc
     .text
       line-height 50px
-      float left
       font-weight bold
       font-size 14px
-    .iconfont
-      font-size 14px
-      height 26px
-      line-height 30px
-      margin-top 12px
-      float right
-      border 1px solid #ccc
-      border-radius 50px
   .hot-list
     width 100vw
     .song

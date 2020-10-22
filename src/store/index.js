@@ -14,6 +14,7 @@ export default new Vuex.Store({
     currentTime: 0,
     duration: 0,
     percent: 0,
-    imageTurn: false
+    userId: 0,
+    cookie: ''
   }
 })
