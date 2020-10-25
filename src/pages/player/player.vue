@@ -181,7 +181,7 @@ export default {
           height 20px
           line-height 20px
           font-size 13px
-          color #ccc
+          color #fff
       .image
         position relative
         height calc(100vh - 200px)

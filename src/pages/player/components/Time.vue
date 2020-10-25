@@ -1,12 +1,11 @@
 <template>
-  <div class="time">
+  <div class="time" @click="progressClick">
     <div class="pargress-box">
       <span class="time time-left">{{format(this.$store.state.currentTime)}}</span>
       <div class="pargress-bar" ref="progressBar">
         <div class="bar-box">
           <div class="progress" ref="progress"></div>
-          <div class="progress-btn-box" ref="progressBtn">
-            <!-- <div class="progress-btn"></div> -->
+          <div class="progress-btn-box" ref="progressBtn" @touchstart="progressTouchStart" @touchmove="progressTouchMove" @touchend="progressTouchEnd">
           </div>
         </div>
       </div>
@@ -18,7 +17,36 @@
 <script>
 export default {
   name: 'Time',
+  data () {
+    return {
+      touch: {}
+    }
+  },
   methods: {
+    progressClick (e) {
+      this.$refs.progress.style.width = `${e.offsetX}px`
+      this.$refs.progressBtn.style.transform = `translate3D(${e.offsetX}px, 0, 0)`
+      const barWidth = this.$refs.progressBar.clientWidth
+      this.$store.state.percentClick = this.$refs.progress.clientWidth / barWidth
+    },
+    progressTouchStart (e) {
+      this.touch.status = true
+      this.touch.startX = e.touches[0].pageX
+      this.touch.left = this.$refs.progress.clientWidth
+    },
+    progressTouchMove (e) {
+      if (this.touch.status) {
+        const deltax = e.touches[0].pageX - this.touch.startX
+        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth, Math.max(0, this.touch.left + deltax))
+        this.$refs.progress.style.width = `${offsetWidth}px`
+        this.$refs.progressBtn.style.transform = `translate3D(${offsetWidth}px, 0, 0)`
+      }
+    },
+    progressTouchEnd () {
+      this.touch.status = false
+      const barWidth = this.$refs.progressBar.clientWidth
+      this.$store.state.percentClick = this.$refs.progress.clientWidth / barWidth
+    },
     format (time) {
       time = time | 0
       let minute = time / 60 | 0
@@ -30,7 +58,7 @@ export default {
   },
   watch: {
     '$store.state.percent' () {
-      if (this.$store.state.percent) {
+      if (this.$store.state.percent > 0) {
         const barWidth = this.$refs.progressBar.clientWidth
         const offsetWidth = barWidth * this.$store.state.percent
         this.$refs.progress.style.width = `${offsetWidth}px`

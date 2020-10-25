@@ -14,6 +14,7 @@
             <div class="songer"><span>{{item.artists[0].name}}</span> - {{item.album.name}}</div>
           </div>
         </li>
+        <li class="none" v-show="this.$store.state.duration"></li>
       </ul>
     </div>
   </div>
@@ -140,4 +141,8 @@ export default {
           color #666
         .more span
           color blue
+      .none
+        height 60px
+        width 100vw
+        background #fff
 </style>

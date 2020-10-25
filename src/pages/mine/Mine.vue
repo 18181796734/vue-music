@@ -2,12 +2,12 @@
   <transition>
     <div class="mine">
       <div class="no-sign" v-show="!$store.state.userId">
+        <div class="back iconfont" @click="handleBackClick">&#xe606;</div>
         <div class="buttom" @click="handleOutClick">登入发现更多精彩</div>
-        <div class="buttom" @click="handleBackClick">返回</div>
       </div>
       <div class="sign" v-show="$store.state.userId">
         <div class="user-data">
-        <div class="avatar"><img class="img" v-lazy="avatar" alt=""></div>
+        <div class="avatar"><img class="img" v-lazy="avatarUrl" alt=""></div>
         <div class="user-name">
           <div class="name">{{userName}}</div>
           <div class="vip" v-show="vipType"><img src="@/common/image/vip.png" alt=""></div>
@@ -36,7 +36,7 @@ export default {
   name: 'Mine',
   data () {
     return {
-      avatar: '',
+      avatarUrl: '',
       userName: '',
       likeList: '',
       vipType: 0,
@@ -51,6 +51,7 @@ export default {
     handleOutClick () {
       window.localStorage.setItem('登入令牌', '')
       window.localStorage.setItem('用户ID', '')
+      this.$store.state.songUrl = ''
       this.$router.push({
         path: '/sign'
       })
@@ -62,7 +63,7 @@ export default {
       this.$store.state.cookie = localStorage.getItem('登入令牌')
       this.$store.state.userId = localStorage.getItem('用户ID')
       getUserData(this.$store.state.userId, this.$store.state.cookie).then((res) => {
-        this.avatar = res.data.profile.avatarUrl
+        this.avatarUrl = res.data.profile.avatarUrl
         this.userName = res.data.profile.nickname
         this.vipType = res.data.profile.vipType
       })
@@ -104,7 +105,16 @@ export default {
       text-align center
       border-radius 40px
       color rgb(220, 44, 31)
-      margin 40% 25%
+      position absolute
+      top 50%
+      left 50%
+      transform translateX(-50%) translateY(-50%)
+    .back
+      width 60px
+      height 50px
+      line-height 50px
+      text-align center
+      font-size 30px
   .mine
     width 100vw
     height 100vh

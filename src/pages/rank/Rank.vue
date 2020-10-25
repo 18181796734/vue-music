@@ -15,6 +15,7 @@
               </ul>
             </div>
           </li>
+          <li class="none" v-show="this.$store.state.duration"></li>
         </ul>
       </div>
     </v-touch>
@@ -108,4 +109,8 @@ export default {
             overflow hidden
             white-space nowrap
             text-overflow ellipsis
+      .none
+        height 60px
+        width 100vw
+        background #fff
 </style>

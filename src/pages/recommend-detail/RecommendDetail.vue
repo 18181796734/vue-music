@@ -66,7 +66,6 @@ export default {
       this.$store.state.cookie = localStorage.getItem('登入令牌')
       getPlayList(this.$route.params.id, this.$store.state.cookie).then((res) => {
         this.playlist = res.data.playlist
-        console.log(res.data.playlist)
         this.songList = res.data.playlist.tracks
         for (let i = 0; i < this.songList.length; i++) {
           this.playingList.push(res.data.playlist.trackIds[i].id)

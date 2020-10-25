@@ -12,6 +12,7 @@
             </li>
           </ul>
         </li>
+        <li class="none" v-show="this.$store.state.duration"></li>
       </ul>
     </div>
   </v-touch>
@@ -90,4 +91,8 @@ export default {
           .singer-name
             line-height 60px
             font-size 15px
+      .none
+        height 60px
+        width 100vw
+        background #fff
 </style>

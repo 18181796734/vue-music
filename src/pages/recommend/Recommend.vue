@@ -8,7 +8,6 @@
         </v-touch>
       </div>
     </div>
-    <div class="none" v-show="this.$store.state.duration"></div>
     <router-view></router-view>
   </div>
 </template>
@@ -51,8 +50,4 @@ export default {
       width 100vw
       .recommend
         width 100%
-  .none
-    height 100px
-    width 100vw
-    background #fff
 </style>

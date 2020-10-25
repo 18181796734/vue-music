@@ -16,6 +16,7 @@
             <div class="songer">{{songer(item.ar)}}&nbsp;-&nbsp;{{item.al.name}}</div>
           </div>
         </li>
+        <li class="none" v-show="this.$store.state.duration"></li>
       </ul>
     </div>
   </div>
@@ -116,4 +117,8 @@ export default {
           overflow hidden
           text-overflow ellipsis
           white-space nowrap
+    .none
+      height 60px
+      width 100vw
+      background #fff
 </style>

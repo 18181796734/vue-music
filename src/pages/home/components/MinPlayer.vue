@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     handleRouteClick () {
+      this.$store.state.router = this.$route.path
       this.$router.push({
         path: '/player/' + this.$store.state.playSongId
       })

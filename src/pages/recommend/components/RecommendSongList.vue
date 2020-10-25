@@ -12,6 +12,7 @@
         </div>
       </li>
     </ul>
+    <div class="none" v-show="this.$store.state.duration"></div>
     <!-- <router-view></router-view> -->
   </div>
 </template>
@@ -89,4 +90,8 @@ export default {
         -webkit-box-orient: vertical /** 设置或检索伸缩盒对象的子元素的排列方式 **/
         -webkit-line-clamp: 2 /** 显示的行数 **/
         overflow: hidden  /** 隐藏超出的内容 **/
+  .none
+    height 60px
+    width 100vw
+    background #fff
 </style>

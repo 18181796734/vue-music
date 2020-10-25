@@ -15,6 +15,7 @@ export default new Vuex.Store({
     duration: 0,
     percent: 0,
     userId: 0,
-    cookie: ''
+    cookie: '',
+    percentClick: 0
   }
 })
