@@ -1,8 +1,8 @@
 <template>
   <div class="header">
-    <router-link tag="div" to="/mine" class="left iconfont">&#xe61c;</router-link>
+    <router-link tag="div" to="/mine" class="left iconfont">&#xe66e;</router-link>
     <div class="log">网抑云音乐</div>
-    <router-link tag="div" to="/search" class="right iconfont">&#xe60f;</router-link>
+    <router-link tag="div" to="/search" class="right iconfont">&#xe6b9;</router-link>
   </div>
 </template>
 
@@ -23,11 +23,12 @@ export default {
     color #fff
     .left
       width 15%
+      font-size 20px
     .log
       flex 1
       font-weight  bold
       letter-spacing 3px
     .right
       width 15%
-      font-size 25px
+      font-size 24px
 </style>

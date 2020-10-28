@@ -3,7 +3,7 @@
     <header class="header">推荐歌单</header>
     <ul class="content">
       <li class="box" @click="handleEnterClick(item.id)" v-for="item of recommendSongList" :key="item.id">
-        <div class="top iconfont">&#xe651;{{count(item.playCount)}}</div>
+        <div class="top iconfont">&#xe77e;{{count(item.playCount)}}</div>
         <div class="image">
           <img v-lazy="item.picUrl" alt="">
         </div>

@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     _getLyric () {
-      getLyric(this.$route.params.id).then((res) => {
+      getLyric(this.$store.state.playSongId).then((res) => {
         this.lyric = res.data.lrc
         if (this.lyric) {
           this.lyricList = new Lyric(res.data.lrc.lyric, this.handleLyric)
@@ -68,6 +68,9 @@ export default {
     },
     '$store.state.percentClick' () {
       this.lyricList.seek(this.$store.state.percentClick * this.$store.state.duration * 1000)
+      if (this.lyric && this.$store.state.playing === false) {
+        this.lyricList.togglePlay()
+      }
     }
   }
 }

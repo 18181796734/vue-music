@@ -3,7 +3,7 @@
     <div class="header">
       <div class="back iconfont" @click="handleBack">&#xe606;</div>
       <input class="search-key" v-model="saerchKey">
-      <div @click="handleDetale" class="detele">{{saerchKey==='' ? '' : 'X'}}</div>
+      <div @click="handleDetale" class="detele iconfont">{{saerchKey==='' ? '' : '&#xe600;'}}</div>
     </div>
     <SearchHot v-show="!search" @getHotSong="getHotSong"></SearchHot>
     <div v-show="search" class="resuits" ref="wrapper">

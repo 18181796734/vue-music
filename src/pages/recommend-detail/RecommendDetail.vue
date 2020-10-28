@@ -100,7 +100,7 @@ export default {
       .back
         width 60px
         text-align center
-        font-size 30px
+        font-size 25px
       .header-text
         width calc(100vw - 60px)
     .content

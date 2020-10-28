@@ -11,7 +11,7 @@
         <div class="user-name">
           <div class="name">{{userName}}</div>
           <div class="vip" v-show="vipType"><img src="@/common/image/vip.png" alt=""></div>
-          <div class="no-vip" v-show="!vipType">开通黑胶会员享尊享特权</div>
+          <div class="no-vip" v-show="!vipType">穷逼，连VIP都不是</div>
         </div>
         </div>
         <div class="like">
@@ -64,6 +64,7 @@ export default {
       this.$store.state.userId = localStorage.getItem('用户ID')
       getUserData(this.$store.state.userId, this.$store.state.cookie).then((res) => {
         this.avatarUrl = res.data.profile.avatarUrl
+        console.log(this.avatarUrl)
         this.userName = res.data.profile.nickname
         this.vipType = res.data.profile.vipType
       })

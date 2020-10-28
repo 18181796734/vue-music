@@ -1,9 +1,9 @@
 <template>
-  <div class="min-player">
+  <div class="min-player" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
     <div class="image" @click="handleRouteClick">
       <img v-lazy="this.imageUrl" alt="">
     </div>
-    <div class="song" @click="handleRouteClick">
+    <div class="song">
       <div class="songname" v-if="songData[0]">
         {{songData[0].name}}
       </div>
@@ -17,7 +17,7 @@
         <circle class="progress-bar" stroke-width="4" r="45" cx="50" cy="50" fill="transparent" :stroke-dasharray="dashArray" :stroke-dashoffset="dashOffset"></circle>
       </svg>
       <div class="iconfont">
-        {{this.$store.state.playing === true ? '&#xe6a9;' : '&#xe651;'}}
+        {{this.$store.state.playing === true ? '&#xe663;' : '&#xe624;'}}
       </div>
     </div>
   </div>
@@ -32,7 +32,8 @@ export default {
     return {
       songData: [],
       imageUrl: '',
-      dashArray: Math.PI * 100
+      dashArray: Math.PI * 100,
+      touch: {}
     }
   },
   computed: {
@@ -53,6 +54,55 @@ export default {
     handlePauseClick () {
       this.$store.state.playing = !this.$store.state.playing
     },
+    touchStart (e) {
+      this.touch.status = true
+      this.touch.startX = e.touches[0].pageX
+      console.log(this.touch.startX)
+    },
+    touchMove (e) {
+      if (this.touch.status) {
+        // const deltax = e.touches[0].pageX - this.touch.startX
+        // if (deltax > 50) {
+        //   console.log('测试')
+        //   this.changeSong('on')
+        // } else if (deltax < -50) {
+        //   alert('下一曲')
+        // }
+      }
+    },
+    touchEnd (e) {
+      this.touch.status = false
+      console.log(e.changedTouches[0].pageX)
+      const deltax = e.changedTouches[0].pageX - this.touch.startX
+      console.log(deltax)
+      if (deltax > 100) {
+        console.log('测试')
+        this.changeSong('on')
+      } else if (deltax < -100) {
+        this.changeSong('under')
+      } else if (deltax === 0) {
+        this.handleRouteClick()
+      }
+    },
+    changeSong (change) {
+      let playingList = this.$store.state.playingList
+      let id = Number(this.$store.state.playSongId)
+      console.log(playingList)
+      console.log(id)
+      if (change === 'on') {
+        if (playingList.indexOf(id) > -1) {
+          let n = playingList.indexOf(id) === 0 ? playingList.length - 1 : -1
+          this.$store.state.playSongId = playingList[playingList.indexOf(id) + n]
+        } else {
+          this.$store.state.playSongId = playingList[0]
+        }
+      } else {
+        if (playingList.indexOf(id) > -1) {
+          let n = playingList.indexOf(id) === playingList.length - 1 ? playingList.length - 1 : -1
+          this.$store.state.playSongId = playingList[playingList.indexOf(id) - n]
+        }
+      }
+    },
     _getSongDetail () {
       if (this.$store.state.playSongId) {
         getSongDetail(this.$store.state.playSongId).then((res) => {
@@ -64,6 +114,9 @@ export default {
   },
   watch: {
     '$store.state.songUrl' () {
+      this._getSongDetail()
+    },
+    '$store.state.playSongId' () {
       this._getSongDetail()
     }
   }
@@ -127,5 +180,5 @@ export default {
         top 50%
         left 50%
         transform translateX(-50%) translateY(-50%)
-        font-size 22px
+        font-size 20px
 </style>
